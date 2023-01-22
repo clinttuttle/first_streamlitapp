@@ -27,10 +27,8 @@ streamlit.dataframe(fruits_to_show)
 
 #creat a function
 def get_fruitvice_data(this_fruit_choice):
-      #import requests
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
-      #Uses pandas json normalize code to normalize json 
-        fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+      fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
+      fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
       return fruityvice_normalized
       
 #New section to display FruityVice repsonse
@@ -40,12 +38,11 @@ try:
   if not fruit_choice:
       streamlit.error("Please select a fruit to get information.")
   else:
-     back_from_function = get_fruitvice_data(fruit_choice)
-     #Puts the normalized json into a dataframe
-       streamlit.dataframe(back_from_function)
+      back_from_function = get_fruitvice_data(fruit_choice)
+      streamlit.dataframe(back_from_function)
 
 except URLError as e:
-  streamlit.error()
+      streamlit.error()
       
 import snowflake.connector
 
